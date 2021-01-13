@@ -1,4 +1,16 @@
-const HEX = {
+import palette from 'google-palette';
+
+const paletteTypes = ['tol-sq', 'tol', 'tol-dv', 'tol-rainbow', 'mpn65', 'rainbow'];
+const paletteType = paletteTypes[Math.floor(Math.random() * paletteTypes.length)];
+const randomPalette = palette(paletteType, 12);
+
+const ORDER = randomPalette.map((_, i) => i.toString());
+const HEX = {};
+randomPalette.forEach((c, i) => {
+	HEX[ORDER[i]] = '#' + c;
+});
+
+const oldHEX = {
 	MAGENTA: '#bb0077',
 	RED: '#e50000',
 	ORANGE: '#f28900',
@@ -11,7 +23,7 @@ const HEX = {
 	BROWN: '#a56729',
 };
 
-const ORDER = [
+const oldORDER = [
 	'RED',
 	'YELLOW',
 	'GREEN',

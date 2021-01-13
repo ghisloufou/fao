@@ -8,7 +8,7 @@ import { loadPrompts } from './prompts/prompts-api.js';
 
 const app = express();
 const httpServer = http.createServer(app);
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 7777;
 
 const io = SocketIO(httpServer);
 

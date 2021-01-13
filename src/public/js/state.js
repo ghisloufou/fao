@@ -7,6 +7,7 @@ import { validateUsername } from '../../common/util';
 
 const socket = io();
 const sfx = new Audio('static/notification_simple-01.wav');
+const turnSfx = new Audio('static/itsyourturntodraw.wav');
 
 const Store = {
 	state: {
@@ -93,8 +94,15 @@ function handleSocket(messageName, handler, errHandler) {
 				? Store.state.gameState.strokes.length
 				: 0;
 			Store.setGameState(data.roomState);
+			console.log("test");
 			if (!Store.state.sfxDisabled && prevStrokesLength < data.roomState.strokes.length) {
-				sfx.play();
+				// Todo : Make it work for first turn
+				if (Store.state.gameState.whoseTurn === Store.state.username) {
+					turnSfx.volume = 0.5;
+					turnSfx.play();
+				} else {
+					sfx.play();
+				}
 			}
 		}
 	});

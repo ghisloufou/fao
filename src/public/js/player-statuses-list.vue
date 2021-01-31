@@ -3,9 +3,14 @@
 		<li v-for="u in users" :key="'0' + u.name">
 			<span v-if="u.connected" :style="{ color: color(u) }"><user-icon /></span>
 			<span v-else><wifi-off-icon /></span>
-			<span :style="{ color: color(u), fontWeight: isMyTurn(u) ? 'bold' : 'normal' }">{{
-				u.name
-			}}</span>
+			<span
+				:style="{
+					color: color(u),
+					fontWeight: isMyTurn(u) ? 'bold' : 'normal',
+					fontSize: isMyTurn(u) ? '17px' : '16px',
+				}"
+				>{{ u.name }}</span
+			>
 		</li>
 	</ul>
 </template>

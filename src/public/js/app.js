@@ -22,6 +22,9 @@ const app = new Vue({
 		usernames() {
 			return this.state.gameState && this.state.gameState.getUsernames();
 		},
+		colors() {
+			return this.state.gameState && this.state.gameState.colors;
+		},
 	},
 });
 export default app;

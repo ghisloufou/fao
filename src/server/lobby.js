@@ -14,7 +14,7 @@ function getRoomByCode(roomCode) {
 function triggerDelayedRoomTeardown(room) {
 	setTimeout(function() {
 		// ensure room really is dead and hasn't already been torn down
-		if(getRoomByCode(room.roomCode) && room.isDead()) {
+		if (getRoomByCode(room.roomCode) && room.isDead()) {
 			teardownRoom(room);
 		} else {
 			debugLog(`Cancel teardown for room-${room.roomCode}`);
@@ -23,34 +23,36 @@ function triggerDelayedRoomTeardown(room) {
 }
 function teardownRoom(room) {
 	rooms.delete(room.roomCode);
-	console.log(`Rm${room.roomCode} teardown. Last round: ${room.round}. Room count: ${rooms.size}`);
+	console.log(
+		`Rm${room.roomCode} teardown. Last round: ${room.round}. Room count: ${rooms.size}`
+	);
 }
 
 function generateRoomCode() {
 	let code = '';
-	for(let i=0; i<ROOM_CODE_LENGTH; i++) {
-		code += ''+randomInt(10);
+	for (let i = 0; i < ROOM_CODE_LENGTH; i++) {
+		code += '' + randomInt(10);
 	}
 	return code;
 }
 function generateUniqueRoomCode() {
-	if(rooms.size >= ROOMS_LIMIT) {
+	if (rooms.size >= ROOMS_LIMIT) {
 		return undefined;
 	}
 	let code;
 	do {
 		code = generateRoomCode();
-	} while(rooms.has(code));
+	} while (rooms.has(code));
 	return code;
 }
 function isFull() {
-	if(rooms.size >= ROOMS_LIMIT) {
+	if (rooms.size >= ROOMS_LIMIT) {
 		return true;
 	}
 	return false;
 }
 function createRoom() {
-	if(isFull()) {
+	if (isFull()) {
 		return undefined;
 	}
 	let code = generateUniqueRoomCode();
@@ -60,6 +62,4 @@ function createRoom() {
 	return rm;
 }
 
-export {
-	createRoom, getRoomByCode, triggerDelayedRoomTeardown, teardownRoom, isFull,
-};
+export { createRoom, getRoomByCode, triggerDelayedRoomTeardown, teardownRoom, isFull };

@@ -14,3 +14,11 @@ colorblind aids
 voting system
 quick-join via url
 Point system (+1 if impostor is found, +1 if impostor finds the word or is not recognized)
+
+                                            \/\/\/\/
+===> Faire en sorte que la palette de couleurs soit liée à chaque Room (et non aux clients). <===
+Voir game-room.js
+                                            /\/\/\/\
+
+Dans le setup, faire en sorte que les pseudos aient les couleurs
+S'inspirer de comment c'est fait dans la game view

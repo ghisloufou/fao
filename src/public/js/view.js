@@ -4,6 +4,7 @@ const VIEW = {
 	GAME: 'game',
 	RULES: 'rules',
 	FAQ: 'faq',
+	VOTE: 'vote',
 };
 
 export default VIEW;

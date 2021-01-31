@@ -1,4 +1,4 @@
-import {negligible} from './util';
+import { negligible } from './util';
 
 /*
 X-Y points with values ranging (0, 0) to (1.0, 1.0)

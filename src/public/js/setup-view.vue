@@ -38,8 +38,24 @@
 				<div class="stripe-content">
 					<div id="setup-header">Players:</div>
 					<ul class="users">
-						<li v-for="username in usernames" :key="'0' + username">{{ username }}</li>
+						<li
+							v-bind:style="{ color: 'red' }"
+							v-for="username in usernames"
+							:key="'0' + username"
+						>
+							{{ username }}
+						</li>
 					</ul>
+				</div>
+			</div>
+
+			<div class="stripe flex-center align-center colors">
+				<div class="stripe-content">
+					<div id="setup-header">Colors:</div>
+					<ul class="colors">
+						<li v-for="color in colors" :key="'0' + color">{{ color }}</li>
+					</ul>
+					<button v-on:click="changeColor(2)">Changer couleur à 2</button>
 				</div>
 			</div>
 
@@ -74,6 +90,9 @@ export default {
 		usernames: {
 			type: Array,
 		},
+		colors: {
+			type: Array,
+		},
 	},
 	data() {
 		return {
@@ -89,6 +108,9 @@ export default {
 		leave() {
 			Store.setView(VIEW.HOME);
 			Store.submitLeaveGame();
+		},
+		changeColor(colorIdx) {
+			Store.submitChangeColor(Store.state.roomCode, Store.state.username, colorIdx);
 		},
 	},
 };

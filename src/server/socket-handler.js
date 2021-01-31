@@ -123,6 +123,15 @@ const MessageHandlers = {
 		rm.invokeSetup();
 		broadcastRoomState(io, rm, MESSAGE.RETURN_TO_SETUP);
 	},
+	[MESSAGE.CHANGE_COLOR](io, sock, data) {
+		// data : username, colorIdx
+		GamePrecond.sockHasUser(sock);
+		GamePrecond.userIsInARoom(sock.user);
+		let rm = sock.user.gameRoom;
+		// Change user color for game room
+		rm.changeUserColor(data.username, data.colorIdx);
+		broadcastRoomState(io, rm, MESSAGE.CHANGE_COLOR);
+	},
 
 	disconnect(io, sock, data) {
 		let user = sock.user;

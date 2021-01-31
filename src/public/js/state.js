@@ -75,6 +75,7 @@ const Store = {
 	submitStroke,
 	submitNextRound,
 	submitReturnToSetup,
+	submitChangeColor,
 };
 
 function handleSocket(messageName, handler, errHandler) {
@@ -94,7 +95,6 @@ function handleSocket(messageName, handler, errHandler) {
 				? Store.state.gameState.strokes.length
 				: 0;
 			Store.setGameState(data.roomState);
-			console.log("test");
 			if (!Store.state.sfxDisabled && prevStrokesLength < data.roomState.strokes.length) {
 				// Todo : Make it work for first turn
 				if (Store.state.gameState.whoseTurn === Store.state.username) {
@@ -139,6 +139,7 @@ handleSocket(MESSAGE.USER_LEFT);
 handleSocket(MESSAGE.START_GAME);
 handleSocket(MESSAGE.NEW_TURN);
 handleSocket(MESSAGE.RETURN_TO_SETUP);
+handleSocket(MESSAGE.CHANGE_COLOR);
 
 const usernameValidationWarning =
 	'Username must be 1-15 characters long, and can only contain alphanumerics and spaces';
@@ -168,6 +169,13 @@ function submitJoinGame(roomCode, username) {
 		this.setWarning('joinWarning', usernameValidationWarning);
 		return false;
 	}
+}
+function submitChangeColor(roomCode, username, colorIdx) {
+	socket.emit(MESSAGE.CHANGE_COLOR, {
+		roomCode: roomCode,
+		username: username,
+		colorIdx: colorIdx,
+	});
 }
 function submitLeaveGame() {
 	socket.emit(MESSAGE.LEAVE_ROOM, {});

@@ -4,6 +4,7 @@ import GameError from './game-error.js';
 import Stroke from '../common/stroke.js';
 import * as Util from '../common/util.js';
 import * as Prompts from './prompts/prompts-api.js';
+import * as Colors from '../common/player-colors.js';
 
 const MAX_USERS = 10;
 
@@ -20,6 +21,7 @@ class GameRoom {
 		this.keyword = undefined;
 		this.hint = undefined;
 		this.faker = undefined;
+		this.colors = undefined;
 
 		this.strokes = [];
 	}
@@ -64,6 +66,7 @@ class GameRoom {
 		this.hint = prompt.hint;
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
+		this.colors = Colors.generatePalette();
 		console.log(`Rm${this.roomCode} New round ${this.round}`);
 	}
 	invokeSetup() {
@@ -102,6 +105,9 @@ class GameRoom {
 		}
 		return undefined;
 	}
+	changeUserColor(username, colorIdx) {
+		this.users[username].color = this.colors[colorIdx];
+	}
 	isGameInProgress() {
 		return this.phase === GAME_PHASE.PLAY || this.phase === GAME_PHASE.VOTE;
 	}
@@ -130,6 +136,7 @@ const ClientAdapter = {
 			hint: gameRoom.hint,
 			fakerName: gameRoom.faker ? gameRoom.faker.name : undefined,
 			strokes: gameRoom.strokes,
+			colors: gameRoom.colors,
 		};
 		if (pickFields) {
 			res = _.pick(res, pickFields);
